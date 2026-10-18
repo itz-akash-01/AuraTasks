@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#F4F5F8">
+  <meta name="color-scheme" content="light dark">
+  <script src="theme.js"></script>
+  <meta name="description" content="Aura — an interactive productivity dashboard demo by Mr Akash. Tasks, calendar, projects and analytics with sample data.">
+  <meta property="og:title" content="Aura Dashboard — demo by Mr Akash">
+  <meta property="og:description" content="Explore a working productivity dashboard built by Mr Akash. Sample data only.">
+  <meta property="og:type" content="website">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Crect width=%2732%27 height=%2732%27 rx=%278%27 fill=%27%238170bb%27/%3E%3Cpath d=%27M10 22V12m6 10V8m6 14v-7%27 stroke=%27white%27 stroke-width=%273%27 stroke-linecap=%27round%27/%3E%3C/svg%3E">
+  <title>Aura Dashboard Demo — Mr Akash</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="theme.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <div class="demo-banner" role="note"><strong>Demo version</strong><span>Sample data, saved only in this browser.</span><button class="link-button" id="resetDemo" type="button">Reset demo</button></div>
+  <div class="app-shell">
+    <div class="scrim" aria-hidden="true"></div>
+    <aside class="sidebar" id="sidebar">
+      <button class="drawer-close icon-button" id="drawerClose" type="button" aria-label="Close navigation">×</button>
+      <a class="brand" href="#" aria-label="Mr Akash dashboard home">
+        <span class="brand-mark"><span></span><span></span><span></span></span>
+        <span class="brand-name">AURA<span class="brand-dot">.</span></span>
+      </a>
+      <div class="profile-mini">
+        <div class="avatar avatar-lavender">A<span class="avatar-spark">✦</span></div>
+        <div><strong>Hi, Akash! <span class="wave">✦</span></strong><small>Ready for a good day?</small></div>
+      </div>
+      <div class="nav-label">WORKSPACE</div>
+      <nav class="main-nav" aria-label="Main navigation">
+        <button class="nav-item active" data-view="Dashboard"><span class="nav-icon">⌂</span><span>Dashboard</span></button>
+        <button class="nav-item" data-view="Tasks"><span class="nav-icon">☑</span><span>Tasks</span><span class="nav-count" id="navCount">0</span></button>
+        <button class="nav-item" data-view="Calendar"><span class="nav-icon">▦</span><span>Calendar</span></button>
+        <button class="nav-item" data-view="Projects"><span class="nav-icon">▰</span><span>Projects</span></button>
+        <button class="nav-item" data-view="Analytics"><span class="nav-icon">▥</span><span>Analytics</span></button>
+        <button class="nav-item" data-view="Messages"><span class="nav-icon">◌</span><span>Messages</span><span class="unread-dot"></span></button>
+      </nav>
+      <div class="nav-label tools-label">PREFERENCES</div>
+      <nav class="main-nav">
+        <button class="nav-item" data-view="Settings"><span class="nav-icon">⚙</span><span>Settings</span></button>
+        <button class="nav-item" id="themeToggle"><span class="nav-icon">◐</span><span>Appearance</span><span class="theme-state">Light</span></button>
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="plant-art"><span class="plant-pot">▰</span><span class="plant-leaves">♣</span></div>
+        <p class="break-title">A little reminder</p>
+        <p class="break-copy">Take a breath. Small steps add up. 🌱</p>
+        <div class="break-progress"><span></span></div>
+        <small>You're doing better than you think.</small>
+      </div>
+      <div class="sidebar-footer"><span class="online-dot"></span> All changes saved</div>
+    </aside>
+
+    <main class="main-content" id="main">
+      <header class="topbar">
+        <button class="mobile-menu icon-button" id="menuToggle" aria-label="Open navigation">☰</button>
+        <div class="breadcrumb"><span>Workspace</span><span class="crumb-slash">/</span><strong id="pageTitle">Dashboard</strong></div>
+        <div class="top-actions">
+          <label class="search-box"><span>⌕</span><input id="searchInput" type="search" placeholder="Search anything..." aria-label="Search dashboard"><kbd>⌘ K</kbd></label>
+          <button class="icon-button notification-button" aria-label="Notifications" id="notifyBtn">♧<i></i></button>
+          <button class="user-button" id="userButton"><span class="user-avatar">A</span><span class="user-label">Akash</span><span class="chevron">⌄</span></button>
+        </div>
+      </header>
+
+      <div class="content-wrap">
+        <section class="view-extra" id="viewExtra" hidden tabindex="-1"></section>
+        <section class="welcome-row">
+          <div>
+            <p class="eyebrow"><span class="eyebrow-line"></span> <span id="today"></span></p>
+            <h1><span id="greeting">Hello</span> <span class="sun">☀</span></h1>
+            <p class="welcome-subtitle">A fresh start is a chance to make progress. Here's your overview.</p>
+          </div>
+          <div class="welcome-actions"><button class="button button-quiet" id="exportBtn">↧ <span>Export</span></button><button class="button button-primary" id="addTaskTop"><span>＋</span> New task</button></div>
+        </section>
+
+        <section class="stat-grid" aria-label="Productivity summary">
+          <article class="stat-card stat-purple"><div class="stat-top"><span class="stat-icon">✓</span><span class="stat-change positive">↗ 12.8%</span></div><p>Tasks completed</p><div class="stat-value">24 <span>tasks</span></div><div class="stat-foot">Compared to last week</div><div class="sparkline purple-spark"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></article>
+          <article class="stat-card stat-peach"><div class="stat-top"><span class="stat-icon">◷</span><span class="stat-change positive">↗ 8.2%</span></div><p>In progress</p><div class="stat-value">08 <span>tasks</span></div><div class="stat-foot">2 due today</div><div class="sparkline peach-spark"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></article>
+          <article class="stat-card stat-green"><div class="stat-top"><span class="stat-icon">⚑</span><span class="stat-change positive">↗ 6.4%</span></div><p>Projects completed</p><div class="stat-value">56 <span>total</span></div><div class="stat-foot">You're on a roll</div><div class="sparkline green-spark"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></article>
+          <article class="stat-card stat-yellow"><div class="stat-top"><span class="stat-icon">✦</span><span class="stat-change neutral">This week</span></div><p>Focus time</p><div class="stat-value">18<span>h</span> 24<span>m</span></div><div class="stat-foot">+2h from last week</div><div class="sparkline yellow-spark"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></article>
+        </section>
+
+        <section class="dashboard-grid">
+          <article class="panel productivity-panel">
+            <div class="panel-heading"><div><h2>Productivity overview</h2><p>Your activity is looking good</p></div><button class="select-button" id="periodSelect">This week <span>⌄</span></button></div>
+            <div class="chart-legend"><span><i class="legend-dot"></i> Productivity score</span><span class="legend-note">Weekly goal: 80%</span></div>
+            <div class="chart-wrap">
+              <div class="y-labels"><span>100</span><span>75</span><span>50</span><span>25</span><span>0</span></div>
+              <svg class="line-chart" viewBox="0 0 650 230" preserveAspectRatio="none" role="img" aria-label="Productivity score increased during the week">
+                <defs><linearGradient id="areaFill" x1="0" x2="0" y1="0" y2="1"><stop offset="0%" stop-color="#9b8bd4" stop-opacity=".25"/><stop offset="100%" stop-color="#9b8bd4" stop-opacity="0"/></linearGradient></defs>
+                <g class="chart-grid"><line x1="0" y1="15" x2="650" y2="15"/><line x1="0" y1="62" x2="650" y2="62"/><line x1="0" y1="109" x2="650" y2="109"/><line x1="0" y1="156" x2="650" y2="156"/><line x1="0" y1="203" x2="650" y2="203"/></g>
+                <path class="chart-area" d="M10 177 L112 130 L214 70 L316 101 L418 53 L520 53 L622 34 L622 203 L10 203 Z"/>
+                <path class="chart-line" d="M10 177 L112 130 L214 70 L316 101 L418 53 L520 53 L622 34"/>
+                <g class="chart-points"><circle cx="10" cy="177" r="4"/><circle cx="112" cy="130" r="4"/><circle cx="214" cy="70" r="4"/><circle cx="316" cy="101" r="4"/><circle cx="418" cy="53" r="4"/><circle cx="520" cy="53" r="4"/><circle cx="622" cy="34" r="4"/></g>
+                <g class="chart-tooltip"><rect x="457" y="12" width="106" height="28" rx="9"/><text x="510" y="30" text-anchor="middle">Great job! ✨</text></g>
+              </svg>
+            </div>
+            <div class="x-labels"><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span><span>Sun</span></div>
+            <div class="chart-footer"><span id="chartNote"><b class="footer-dot"></b> <span id="chartNoteText"></span></span><span class="footer-highlight" id="chartDelta"></span></div>
+          </article>
+
+          <article class="panel todo-panel">
+            <div class="panel-heading"><div><h2>To-do list <span class="heading-count" id="taskCount">4</span></h2><p>Keep your momentum going</p></div><button class="small-add" id="addTaskSide" aria-label="Add task">＋</button></div>
+            <div class="task-list" id="taskList"></div><p class="empty-search" id="taskEmpty" hidden>No tasks yet. Add one to get started.</p>
+            <button class="view-all" data-view="Tasks">View all tasks <span>→</span></button>
+          </article>
+
+          <article class="panel activity-panel">
+            <div class="panel-heading"><div><h2>Recent activity</h2><p>Little wins from your workspace</p></div><button class="more-button" id="clearActivity" aria-label="Clear recent activity" title="Clear activity">×</button></div>
+            <div class="activity-list" id="activityList">
+              <div class="activity-row"><span class="activity-icon activity-done">✓</span><div><p>Completed <strong>“User Research”</strong></p><small>Project · Website redesign</small></div><time>2h ago</time></div>
+              <div class="activity-row"><span class="activity-icon activity-folder">▰</span><div><p>Updated project <strong>“Website Redesign”</strong></p><small>Project · Design team</small></div><time>3h ago</time></div>
+              <div class="activity-row"><span class="activity-icon activity-message">✉</span><div><p>New message from <strong>Sarah</strong></p><small>Message · Team chat</small></div><time>5h ago</time></div>
+              <div class="activity-row"><span class="activity-icon activity-file">↥</span><div><p>Uploaded <strong>report.pdf</strong></p><small>File · Monthly report</small></div><time>1d ago</time></div>
+            </div>
+            <button class="view-all" data-view="Activity">View activity <span>→</span></button>
+          </article>
+
+          <article class="panel calendar-panel">
+            <div class="panel-heading"><div><h2 id="calTitle">Calendar</h2><p>Your schedule at a glance</p></div><div class="calendar-controls"><button id="prevMonth" aria-label="Previous month">‹</button><button id="nextMonth" aria-label="Next month">›</button></div></div>
+            <div class="calendar-grid" id="calendarGrid">
+              <span class="day-name">MON</span><span class="day-name">TUE</span><span class="day-name">WED</span><span class="day-name">THU</span><span class="day-name">FRI</span><span class="day-name">SAT</span><span class="day-name">SUN</span>
+            </div>
+            <div class="calendar-legend"><span><i class="event-dot peach-dot"></i> Task due</span></div><p class="day-info" id="dayInfo" aria-live="polite">Select a day to see tasks due.</p><button class="button button-quiet" id="addForDay" type="button" hidden>＋ Add task for this day</button>
+          </article>
+
+          <article class="encouragement-card">
+            <div class="encourage-copy"><span class="tiny-spark">✦ A NOTE FOR YOU</span><h2>You're doing<br>amazing, Akash!</h2><p>Progress over perfection. Keep showing up and trust your pace.</p><button id="inspireBtn">A little motivation <span>↗</span></button></div>
+            <div class="bunny-art" aria-hidden="true"><div class="bunny-ear ear-one"></div><div class="bunny-ear ear-two"></div><div class="bunny-face"><span class="bunny-eye eye-one"></span><span class="bunny-eye eye-two"></span><span class="bunny-nose"></span><span class="bunny-cheek cheek-one"></span><span class="bunny-cheek cheek-two"></span></div><div class="bunny-heart">♥</div></div>
+            <span class="decor-star star-one">✦</span><span class="decor-star star-two">✧</span>
+          </article>
+        </section>
+
+        <footer class="page-footer"><span>Made for calmer, more focused days.</span><span class="signature">Designed with care by <strong class="neon-name">Mr Akash<span class="shine"></span></strong></span><span>© <span id="year"></span> Aura demo</span></footer>
+      </div>
+    </main>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <dialog id="taskDialog" class="task-dialog" aria-labelledby="dlgTitle">
+    <form id="taskForm" novalidate>
+      <div class="dialog-heading"><div><span class="dialog-kicker">NEW TASK</span><h2 id="dlgTitle">Create a task</h2></div><button class="dialog-close" type="button" data-close aria-label="Close">×</button></div>
+      <label class="form-label" for="taskName">Task name</label><input class="form-input" id="taskName" maxlength="80" autocomplete="off" aria-describedby="taskErr">
+      <label class="form-label" for="taskCategory">Category</label><select class="form-input" id="taskCategory"><option>Work</option><option>Design</option><option>Study</option><option>Personal</option></select>
+      <label class="form-label" for="taskPriority">Priority</label><select class="form-input" id="taskPriority"><option>High</option><option selected>Med</option><option>Low</option></select>
+      <label class="form-label" for="taskDue">Due date (optional)</label><input class="form-input" id="taskDue" type="date">
+      <p class="form-error" id="taskErr" role="alert"></p>
+      <div class="dialog-actions"><button class="button button-quiet" type="button" data-close>Cancel</button><button class="button button-primary" type="submit">Create task</button></div>
+    </form>
+  </dialog>
+  <script src="script.js"></script>
+</body>
+</html>
