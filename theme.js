@@ -1,1 +1,0 @@
-(function(){try{var s=JSON.parse(localStorage.getItem('aura-demo-v2'));var d=s&&typeof s.dark==='boolean'?s.dark:matchMedia('(prefers-color-scheme: dark)').matches;document.documentElement.dataset.theme=d?'dark':'light';}catch(e){}})();

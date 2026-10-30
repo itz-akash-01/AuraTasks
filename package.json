@@ -1,1 +1,0 @@
-{ "name": "aura-dashboard-demo", "version": "3.0.0", "private": true, "description": "Aura dashboard demo by Mr Akash", "engines": { "node": ">=18" } }
