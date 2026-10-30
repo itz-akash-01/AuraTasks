@@ -427,7 +427,7 @@
 .session-composer:focus-within {
   border-color: var(--accent);
   background: var(--input-focus);
-  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.15);
+  box-shadow: 0 0 0 3px rgba(192, 132, 252, 0.18);
 }
 
 .session-composer textarea {
